@@ -1,13 +1,12 @@
-<h1>Listing libraries</h1>
+<h1>検索対象の一覧</h1>
 
 <table>
   <tr>
-    <th>Name</th>
-    <th>Title</th>
-    <th>Author</th>
-    <th>Publisher</th>
-    <th>Year</th>
-    <th></th>
+    <th>検索対象</th>
+    <th>書名</th>
+    <th>著者</th>
+    <th>出版社</th>
+    <th>出版年</th>
     <th></th>
     <th></th>
   </tr>
@@ -19,13 +18,12 @@
     <td><%= library.author %></td>
     <td><%= library.publisher %></td>
     <td><%= library.year %></td>
-    <td><%= link_to 'Show', library %></td>
-    <td><%= link_to 'Edit', edit_library_path(library) %></td>
-    <td><%= link_to 'Destroy', library, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    <td><%= link_to '編集', edit_library_path(library) %></td>
+    <td><%= link_to '削除', library, method: :delete, data: { confirm: '削除してもよろしいですか？' } %></td>
   </tr>
 <% end %>
 </table>
 
 <br />
 
-<%= link_to 'New Library', new_library_path %>
+<%= link_to '検索対象の新規作成', new_library_path %>

@@ -1,30 +1,30 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <b>Name:</b>
+  <b>検索対象:</b>
   <%= @library.name %>
 </p>
 
 <p>
-  <b>Title:</b>
+  <b>書名:</b>
   <%= @library.title %>
 </p>
 
 <p>
-  <b>Author:</b>
+  <b>著者:</b>
   <%= @library.author %>
 </p>
 
 <p>
-  <b>Publisher:</b>
+  <b>出版社:</b>
   <%= @library.publisher %>
 </p>
 
 <p>
-  <b>Year:</b>
+  <b>出版年:</b>
   <%= @library.year %>
 </p>
 
 
-<%= link_to 'Edit', edit_library_path(@library) %> |
-<%= link_to 'Back', libraries_path %>
+<%= link_to '編集', edit_library_path(@library) %> |
+<%= link_to '戻る', libraries_path %>
