@@ -44,6 +44,7 @@ class LibrariesController < ApplicationController
 
     respond_to do |format|
       if @library.save
+        @library.check_new_book
         format.html { redirect_to @library, notice: 'Library was successfully created.' }
         format.json { render json: @library, status: :created, location: @library }
       else
@@ -60,6 +61,7 @@ class LibrariesController < ApplicationController
 
     respond_to do |format|
       if @library.update_attributes(params[:library])
+        @library.check_new_book
         format.html { redirect_to @library, notice: 'Library was successfully updated.' }
         format.json { head :no_content }
       else
