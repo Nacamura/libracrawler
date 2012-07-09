@@ -16,7 +16,7 @@ class NishitokyoStrategy
   end
 
   def parse_to_books(html)
-    new_books = []
+    crawled_books = []
     doc = Hpricot html
     (doc/'tr').each do |tr|
       if( (tr/'td').inner_html=='' )
@@ -32,9 +32,9 @@ class NishitokyoStrategy
       end
       b = Book.new(:title=>book_attr[0],:author=>book_attr[1],
                    :publisher=>book_attr[2],:year=>book_attr[3])
-      new_books.push b
+      crawled_books.push b
     end
-    new_books
+    crawled_books
   end
 
 end
