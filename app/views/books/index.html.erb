@@ -1,15 +1,12 @@
-<h1>Listing books</h1>
+<h1>登録済み書籍</h1>
+<h2>この一覧は検索でヒットしても無視されます</h2>
 
 <table>
   <tr>
-    <th>Title</th>
-    <th>Author</th>
-    <th>Publisher</th>
-    <th>Year</th>
-    <th>Library</th>
-    <th></th>
-    <th></th>
-    <th></th>
+    <th>書名</th>
+    <th>著者</th>
+    <th>出版社</th>
+    <th>出版年</th>
   </tr>
 
 <% @books.each do |book| %>
@@ -18,14 +15,10 @@
     <td><%= book.author %></td>
     <td><%= book.publisher %></td>
     <td><%= book.year %></td>
-    <td><%= book.library %></td>
-    <td><%= link_to 'Show', book %></td>
-    <td><%= link_to 'Edit', edit_book_path(book) %></td>
-    <td><%= link_to 'Destroy', book, method: :delete, data: { confirm: 'Are you sure?' } %></td>
   </tr>
 <% end %>
 </table>
 
-<br />
+<%= link_to '戻る', libraries_path %>
 
-<%= link_to 'New Book', new_book_path %>
+<br /><br />
