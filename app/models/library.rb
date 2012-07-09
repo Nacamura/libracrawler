@@ -2,6 +2,7 @@ class Library < ActiveRecord::Base
   has_many :books
   attr_accessible :author, :name, :publisher, :title, :year
   attr_accessor :sendmail
+  validates :name, :presence => true, :inclusion => {:in => LIBRARY_NAMES}
 
   def check_new_book
     new_books = find_new_books(crawl_library)
