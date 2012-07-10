@@ -10,7 +10,7 @@ class Library < ActiveRecord::Base
   end
 
   def crawl_library
-    LibrariesHelper.crawl(self)
+    extend(STRATEGY_MAPPING[name]).crawl
   end
 
   def find_new_books(crawled_books)
