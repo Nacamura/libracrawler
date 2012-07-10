@@ -1,17 +1,17 @@
-class NishitokyoStrategy
+module NishitokyoStrategy
 
-  def crawl(library)
-    parse_to_books(get_html(library))
+  def crawl
+    parse_to_books(get_html)
   end
 
-  def get_html(l)
+  def get_html
     RestClient.post('http://www.library.city.nishitokyo.lg.jp/cgi-bin/search',
                     :referer=>"http://www.library.city.nishitokyo.lg.jp/search.shtml",
-                    "ITEM1"=>"AB", "KEY1"=>l.title.encode('Shift_JIS'), "COMP1"=>"3",
-                    "ITEM2"=>"CD", "KEY2"=>l.author.encode('Shift_JIS'), "COMP2"=>"3",
-                    "ITEM3"=>"EF", "KEY3"=>l.publisher.encode('Shift_JIS'), "COMP3"=>"3",
+                    "ITEM1"=>"AB", "KEY1"=>title.encode('Shift_JIS'), "COMP1"=>"3",
+                    "ITEM2"=>"CD", "KEY2"=>author.encode('Shift_JIS'), "COMP2"=>"3",
+                    "ITEM3"=>"EF", "KEY3"=>publisher.encode('Shift_JIS'), "COMP3"=>"3",
                     "COND"=>"1", "SORT"=>"1",
-                    "YEARFROM"=>l.year.to_s, "YEARTO"=>l.year.to_s,
+                    "YEARFROM"=>year.to_s, "YEARTO"=>year.to_s,
                     "MAXVIEW"=>"300").encode('UTF-8', 'Shift_JIS')
   end
 
