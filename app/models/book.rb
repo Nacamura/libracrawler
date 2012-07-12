@@ -17,4 +17,8 @@ class Book < ActiveRecord::Base
     return false
   end
 
+  def eql?(other)
+    self == other
+  end
+
 end
