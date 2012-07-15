@@ -1,4 +1,5 @@
 class Library < ActiveRecord::Base
+  include ApplicationHelper
   has_many :books
   attr_accessible :author, :name, :publisher, :title, :year
   attr_accessor :sendmail
@@ -27,5 +28,7 @@ class Library < ActiveRecord::Base
   def notify(new_books)
     Notifier.notify_new_book(new_books).deliver
   end
+
+  log_around_invoke
 
 end
