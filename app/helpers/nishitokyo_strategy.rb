@@ -29,11 +29,11 @@ module NishitokyoStrategy
           next
         end
         a_content = (td/'a').inner_html
-        book_attr.push (a_content=='') ? td.inner_html : a_content
+        book_attr << ( (a_content=='') ? td.inner_html : a_content )
       end
       b = Book.new(:title=>book_attr[0],:author=>book_attr[1],
                    :publisher=>book_attr[2],:year=>book_attr[3])
-      crawled_books.push b
+      crawled_books << b
     end
     crawled_books
   end

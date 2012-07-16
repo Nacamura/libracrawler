@@ -46,11 +46,11 @@ module ComicStrategy
         if(index > 3)
           next
         end
-        book_attr.push td.inner_html.gsub(/<.*(br|BR).*>/, '')
+        book_attr << ( td.inner_html.gsub(/<.*(br|BR).*>/, '') )
       end
       b = Book.new(:release=>book_attr[0],:publisher=>book_attr[1],
                    :title=>book_attr[2],:author=>book_attr[3])
-      crawled_books.push b
+      crawled_books << b
     end
     crawled_books
   end
