@@ -11,8 +11,8 @@ module NishitokyoStrategy
                     "ITEM1"=>"AB", "KEY1"=>title.to_s.encode('Shift_JIS'), "COMP1"=>"3",
                     "ITEM2"=>"CD", "KEY2"=>author.to_s.encode('Shift_JIS'), "COMP2"=>"3",
                     "ITEM3"=>"EF", "KEY3"=>publisher.to_s.encode('Shift_JIS'), "COMP3"=>"3",
-                    "COND"=>"1", "SORT"=>"1",
-                    "YEARFROM"=>year.to_s, "YEARTO"=>year.to_s,
+                    "COND"=>"1", "SORT"=>"1", "YEARFROM"=>year.to_s.encode('Shift_JIS'),
+                    "YEARTO"=>year.to_s.encode('Shift_JIS'),
                     "MAXVIEW"=>"300").encode('UTF-8', 'Shift_JIS')
   end
 
