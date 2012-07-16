@@ -35,7 +35,7 @@ class Book < ActiveRecord::Base
 
   def matches?(book_attr, keyword)
     book_attr ||= ''
-    (keyword.nil? || keyword=='') || (book_attr.gsub(/(\s|　)/, '').include? keyword)
+    (keyword.nil? || keyword=='') || (book_attr.gsub(/(\s|　)/, '').include? keyword.gsub(/(\s|　)/, ''))
   end 
 
 end
