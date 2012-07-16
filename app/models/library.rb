@@ -1,6 +1,6 @@
 class Library < ActiveRecord::Base
   include ApplicationHelper
-  has_many :books
+  has_many :books, :dependent => :delete_all
   attr_accessible :author, :name, :publisher, :title, :year
   attr_accessor :sendmail
   validates :name, :presence => true, :inclusion => {:in => LIBRARY_NAMES}
