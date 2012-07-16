@@ -1,4 +1,9 @@
-[書名, 著者]<BR>
+<% comic = false
+    @books.each do |book|
+      comic = true if not book.release.nil?
+    end
+%>
+[書名, 著者<%= ', 発売予定日' if comic %>]<BR>
 <% @books.each do |book| %>
-[<%= book.title %>, <%= book.author %>]<BR>
+[<%= book.title %>, <%= book.author %><%= ', ' + book.release if comic %>]<BR>
 <% end %>
