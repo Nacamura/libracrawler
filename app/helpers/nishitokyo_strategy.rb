@@ -1,4 +1,5 @@
 module NishitokyoStrategy
+  include ApplicationHelper
 
   def crawl
     parse_to_books(get_html)
@@ -36,5 +37,7 @@ module NishitokyoStrategy
     end
     crawled_books
   end
+
+  log_around_invoke
 
 end
