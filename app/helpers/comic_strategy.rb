@@ -2,9 +2,7 @@ module ComicStrategy
   include ApplicationHelper
 
   def crawl
-    parse_to_books(get_joint_html).delete_if do |book|
-      !(book === self)
-    end
+    parse_to_books(get_joint_html)
   end
 
   def get_joint_html
@@ -50,7 +48,7 @@ module ComicStrategy
       end
       b = Book.new(:release=>book_attr[0],:publisher=>book_attr[1],
                    :title=>book_attr[2],:author=>book_attr[3])
-      crawled_books << b
+      crawled_books << b if (b === self)
     end
     crawled_books
   end
