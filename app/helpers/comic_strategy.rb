@@ -1,5 +1,5 @@
 module ComicStrategy
-  include ApplicationHelper
+  include LogInterceptor
 
   def crawl
     parse_to_books(get_joint_html)
@@ -52,7 +52,5 @@ module ComicStrategy
     end
     crawled_books
   end
-
-  log_around_invoke
 
 end
