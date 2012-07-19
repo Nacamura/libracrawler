@@ -7,13 +7,12 @@ module LogInterceptor
   module ClassMethods
 
     def method_added(m)
-      log_around_invoke(m)
+      log_around_invoke(m) if LOG_INTERCEPT
     end
 
     def log_around_invoke(m)
-      return if not (LOGGING_METHODS.include? m)
-      original = m.to_s + '_original'
-      return if method_defined? original
+      original = m.to_s + '__original'
+      return if (method_defined? original) || (m.to_s =~ /__original/)
       alias_method original, m
       define_method(m) { |*args, &block|
         Rails.logger.info "#{m}: start at #{start=Time.now}"
