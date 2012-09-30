@@ -13,7 +13,7 @@ module ComicStrategy
 
   def get_html(url)
     begin
-      RestClient.get(url).encode('UTF-8', 'Shift_JIS')
+      RestClient.get(url)
     rescue RestClient::ResourceNotFound
       'Resource for ' + url + ' is not found'
     end
@@ -36,15 +36,16 @@ module ComicStrategy
     crawled_books = []
     doc = Hpricot html
     (doc/'tr').each do |tr|
-      if( (tr/'td').length != 6 )
+      if( (tr/'td').length != 7 )
         next
       end
       book_attr = []
       (tr/'td').each_with_index do |td, index|
-        if(index > 3)
-          next
+        content = td.inner_html
+        if (index == 0)
+          content = content.gsub(/<a.*a>/, '').tr('&nbsp;', '')
         end
-        book_attr << ( td.inner_html.gsub(/<.*(br|BR).*>/, '') )
+        book_attr << content
       end
       b = Book.new(:release=>book_attr[0],:publisher=>book_attr[1],
                    :title=>book_attr[2],:author=>book_attr[3])
