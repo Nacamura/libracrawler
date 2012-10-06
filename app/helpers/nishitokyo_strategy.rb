@@ -13,7 +13,8 @@ module NishitokyoStrategy
                     "ITEM3"=>"EF", "KEY3"=>publisher.to_s.encode('Shift_JIS'), "COMP3"=>"3",
                     "COND"=>"1", "SORT"=>"1", "YEARFROM"=>year.to_s.encode('Shift_JIS'),
                     "YEARTO"=>year.to_s.encode('Shift_JIS'),
-                    "MAXVIEW"=>"300").encode('UTF-8', 'Shift_JIS')
+                    "MAXVIEW"=>"300").encode('UTF-8', 'Shift_JIS',
+                    :invalid => :replace, :undef => :replace)
   end
 
   def parse_to_books(html)
