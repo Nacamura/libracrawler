@@ -36,7 +36,7 @@ module ComicStrategy
     crawled_books = []
     doc = Hpricot html
     (doc/'tr').each do |tr|
-      if( (tr/'td').length != 7 )
+      if( (tr/'td').length != 6 )
         next
       end
       book_attr = []
