@@ -2,7 +2,7 @@ module NishitokyoStrategy
   include LogInterceptor
 
   def crawl
-    construct_books( make_book_strings(get_mechanize_res) )
+    make_books(get_mechanize_res)
   end
 
   def get_mechanize_res
@@ -24,20 +24,20 @@ module NishitokyoStrategy
     form.click_button
   end
 
-  def make_book_strings(mechanize_res)
-    book_strings = []
+  def make_books(mechanize_res)
+    books = []
     mechanize_res.search("tr").each do |tr|
-      tr.search("img").each do |img|
-        book_strings << img.attribute("alt").value
-      end
+      dds = tr.search("dd")
+      if dds.length < 3 then next end
+      img = tr.search("img")
+      if img.length == 0 then next end
+      year = dds[1].text
+      author = dds[2].text
+      publisher = dds[-1].text
+      title = img.attribute("alt").value
+      books << Book.new(:title=>title, :author=>author, :publisher=>publisher, :year=>year)
     end
-    book_strings
-  end
-
-  def construct_books(book_strings)
-    book_strings.map do |str|
-      Book.new(:title=>str)
-    end
+    books
   end
 
 end
