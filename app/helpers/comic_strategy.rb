@@ -2,7 +2,16 @@ module ComicStrategy
   include LogInterceptor
 
   def crawl
-    parse_to_books(get_joint_html)
+    parse_to_books(get_content)
+  end
+
+  def get_content
+    cache = Cache.find_by_title("comic")
+    unless(cache.updated_at.today?)
+      cache.content = get_joint_html
+      cache.save
+    end
+    cache.content
   end
 
   def get_joint_html
