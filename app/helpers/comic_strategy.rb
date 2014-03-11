@@ -1,17 +1,13 @@
 module ComicStrategy
   include LogInterceptor
 
-  def crawl
-    parse_to_books(get_content)
-  end
+  @@books_cache = []
 
-  def get_content
-    cache = Cache.find_by_title("comic")
-    unless(cache.updated_at.today?)
-      cache.content = get_joint_html
-      cache.save
+  def crawl
+    if(@@books_cache.empty?)
+      @@books_cache = parse_to_books(get_joint_html)
     end
-    cache.content
+    filter_books(@@books_cache)
   end
 
   def get_joint_html
@@ -42,7 +38,7 @@ module ComicStrategy
   end
 
   def parse_to_books(html)
-    crawled_books = []
+    parsed_books = []
     doc = Hpricot html
     (doc/'tr').each do |tr|
       if( (tr/'td').length != 6 )
@@ -58,9 +54,15 @@ module ComicStrategy
       end
       b = Book.new(:release=>book_attr[0],:publisher=>book_attr[1],
                    :title=>book_attr[2],:author=>book_attr[3])
-      crawled_books << b if (b === self)
+      parsed_books << b
     end
-    crawled_books
+    parsed_books
   end
 
+  def filter_books(parsed_books)
+    parsed_books.select do |b|
+      b === self
+    end
+  end
+  
 end
