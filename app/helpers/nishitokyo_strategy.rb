@@ -25,6 +25,10 @@ module NishitokyoStrategy
   end
 
   def make_books(mechanize_res)
+    hit_count = mechanize_res.search("p")[2].search("span")[1].text.gsub(/件中.*/, "").to_i
+    if(hit_count > 100)
+      AlartMailer.alart_mail(self.to_s + " 検索件数が#{hit_count}件です。100件目以降は通知されません。").deliver
+    end
     books = []
     mechanize_res.search("tr").each do |tr|
       dds = tr.search("dd")
