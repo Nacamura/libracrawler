@@ -36,7 +36,7 @@ module NishitokyoStrategy
       author = dds[2].text
       publisher = dds[-1].text
       title = img.attribute("alt").value
-      release = "http://www.library.city.nishitokyo.lg.jp" + (tr.search("a").attribute("href").value).tr('.', '')
+      release = "http://www.library.city.nishitokyo.lg.jp" + ( (tr.search("a").attribute("href").value).tr('.', '') )
       books << Book.new(:title=>title, :author=>author, :publisher=>publisher, :year=>year, :release=>release)
     end
     books
