@@ -1,9 +1,16 @@
 <% comic = false
+   nishitokyo = false
     @books.each do |book|
-      comic = true if not book.release.nil?
+    	case book.release
+    	when /\A\d+\/\d+\z/
+    		comic = true
+    	when /www.library.city.nishitokyo.lg.jp/
+    		nishitokyo = true
+    	end
     end
 %>
 [書名, 著者<%= ', 発売予定日' if comic %>]<BR>
 <% @books.each do |book| %>
 [<%= book.title %>, <%= book.author %><%= ', ' + book.release if comic %>]<BR>
+<%= 'URL: ' + book.release if nishitokyo %>
 <% end %>
