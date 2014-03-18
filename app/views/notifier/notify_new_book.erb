@@ -1,10 +1,10 @@
 <% comic = false
    nishitokyo = false
     @books.each do |book|
-    	case book.release
-    	when /\A\d+\/\d+\z/
+    	case Library.find(book.library_id).name
+    	when "コミック"
     		comic = true
-    	when /www.library.city.nishitokyo.lg.jp/
+    	when "西東京市"
     		nishitokyo = true
     	end
     end
