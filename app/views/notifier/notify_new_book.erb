@@ -12,5 +12,5 @@
 [書名, 著者<%= ', 発売予定日' if comic %>]<BR>
 <% @books.each do |book| %>
 [<%= book.title %>, <%= book.author %><%= ', ' + book.release if comic %>]<BR>
-<%= 'URL: ' + book.release if nishitokyo %>
+<%= 'URL: ' + book.release if nishitokyo %><BR>
 <% end %>
